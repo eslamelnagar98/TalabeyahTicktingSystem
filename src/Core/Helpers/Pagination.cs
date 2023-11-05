@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-namespace Core.Helpers;
+﻿namespace Core.Helpers;
 public record class Pagination
 {
     public int PageIndex { get; set; }

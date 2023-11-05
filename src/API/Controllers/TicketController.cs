@@ -11,7 +11,7 @@ public class TicketController : ControllerBase
         _logger = Guard.Against.Null(logger, nameof(logger));
     }
 
-    [HttpGet(Name = "GetTickets")]
+    [HttpGet("Tickets",Name = "GetTickets")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(Pagination), (int)HttpStatusCode.OK)]
     public async Task<ActionResult<Pagination>> GetTickets([FromQuery] TicketsPaginationParams ticketsPaginationParams)
@@ -46,6 +46,14 @@ public class TicketController : ControllerBase
         await _ticketRepository.CreateTicket(ticket);
         await _ticketRepository.Complete();
         return CreatedAtRoute("GetTicket", new { id = ticketDto.Id }, ticketDto);
+    }
+
+    [HttpGet("TicketsAddress",Name = "GetTicketAddress")]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType(typeof(TicketAddressDto), (int)HttpStatusCode.OK)]
+    public ActionResult<TicketAddressDto> GetTicketAddress()
+    {
+        return Ok(new TicketAddressDto());
     }
 
     private Pagination GeneratePagination(TicketsPaginationParams ticketsParams, IReadOnlyList<TicketDto> tickets)

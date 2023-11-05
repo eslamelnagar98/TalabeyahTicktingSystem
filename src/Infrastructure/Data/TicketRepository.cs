@@ -1,6 +1,4 @@
-﻿using Core.Helpers;
-
-namespace Infrastructure.Data;
+﻿namespace Infrastructure.Data;
 public class TicketRepository : ITicketRepository
 {
     private readonly TalabeyahTicktingContext _talabeyahTicktingContext;
