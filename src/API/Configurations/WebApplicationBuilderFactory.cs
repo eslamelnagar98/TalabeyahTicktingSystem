@@ -9,7 +9,8 @@ public class WebApplicationBuilderFactory
             .Services
             .AddTalabeyahTicktingDbContext()
             .AddTicketsServices()
-            .ConfigureBadRequestBehaviour();
+            .ConfigureBadRequestBehaviour()
+            .ConfigureCorsOrigins();
         return builder;
     }
 }

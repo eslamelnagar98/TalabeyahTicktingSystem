@@ -1,0 +1,51 @@
+<div class="container mt-3">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="form-group mx-3 mb-3">
+          <label for="governorateSelect">Governorate:</label>
+          <select [(ngModel)]="governorateSelectedOption" class="form-control">
+            <option *ngFor="let option of governorate" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        <div class="form-group mx-3 mb-3">
+          <label for="citiesSelectedOption">Cities:</label>
+          <select [(ngModel)]="citiesSelectedOption" class="form-control">
+            <option *ngFor="let option of cities" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        <div class="form-group mx-3 mb-3">
+          <label for="districtsSelectedOption">Districts:</label>
+          <select [(ngModel)]="districtsSelectedOption" class="form-control">
+            <option *ngFor="let option of districts" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        <div class="form-group mx-3 mb-3">
+          <label for="phoneNumberInput">Phone Number:</label>
+          <input [(ngModel)]="phoneNumber" type="text" class="form-control" id="phoneNumberInput">
+        </div>
+        <button class="mt-2 btn btn-primary" (click)="createTicket()">Create Ticket</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 mb-4" *ngFor="let ticket of tickets">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ ticket.governorate }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ ticket.city }}, {{ ticket.district }}</h6>
+          <p class="card-text">Phone Number: {{ ticket.phoneNumber }}</p>
+          <p class="card-text">Is Handled: {{ ticket.isHandled ? 'Yes' : 'No' }}</p>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <p class="card-text">Creation Date: {{ ticket.creationDate | date }}</p>
+            <button class="btn btn-outline-primary btn-lg ml-4">Handle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center" *ngIf="totalCount>0">
+    <app-pager [totalCount]="this.totalCount" [pageSize]="this.ticketParams.pageSize"
+      (pageChanged)="onPageChanged($event)"></app-pager>
+  </div>
+</div>

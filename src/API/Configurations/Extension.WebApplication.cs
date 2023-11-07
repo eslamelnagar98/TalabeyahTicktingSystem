@@ -4,6 +4,7 @@ public partial class Extension
     public static WebApplication AddMiddlewares(this WebApplication app)
     {
         app.UseMiddleware<ExeptionMiddleware>();
+        app.UseCors("CorsPolicy");
         if (app.Environment.IsDevelopment())
         {
             app

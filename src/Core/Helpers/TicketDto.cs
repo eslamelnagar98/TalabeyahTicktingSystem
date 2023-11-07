@@ -1,13 +1,14 @@
-﻿namespace Core.Helpers;
+﻿using System.Text.Json.Serialization;
+namespace Core.Helpers;
 public class TicketDto
 {
     public int Id { get; init; }
-    public DateTime CreationDate { get; private set; } = DateTime.Now;
-    public required string PhoneNumber { get; init; }
+    public DateTime CreationDate { get; set; } = DateTime.Now;
+    public required string PhoneNumber { get; init; } = string.Empty;
     public required string Governorate { get; init; } = string.Empty;
     public required string City { get; init; } = string.Empty;
     public required string District { get; init; } = string.Empty;
-    public bool IsHandled { get; set; } = false;
+    public bool IsHandled { get; set; }=false;
 
     public static explicit operator TicketDto(Ticket ticket)
     {

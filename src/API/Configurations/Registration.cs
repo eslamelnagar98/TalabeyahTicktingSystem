@@ -12,7 +12,8 @@ public static class Registration
             logger = Extension.GetLogger();
             app = builder.Build();
             logger.Info($"Service Talabeyah-TicktingSystem Starts Successfully");
-            await app.AddMiddlewares()
+            await app
+                .AddMiddlewares()
                 .ApplyMigrations()
                 .RunAsync();
         }
@@ -30,6 +31,7 @@ public static class Registration
     {
         services
            .AddScoped<ITicketRepository, TicketRepository>()
+           .AddSingleton<TicketAddressDto>()
            .AddControllerConfigurations();
         return services;
     }
@@ -56,6 +58,18 @@ public static class Registration
         });
 
         return services;
+    }
+    public static IServiceCollection ConfigureCorsOrigins(this IServiceCollection services)
+    {
+        return services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy", policy =>
+            {
+                policy.AllowAnyHeader()
+                .AllowAnyMethod()
+                .WithOrigins($"{ClientSide.Ip}:{ClientSide.Port}");
+            });
+        });
     }
 
     private static IServiceCollection AddControllerConfigurations(this IServiceCollection services)

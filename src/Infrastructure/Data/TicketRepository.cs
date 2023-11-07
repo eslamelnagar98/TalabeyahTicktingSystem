@@ -38,4 +38,9 @@ public class TicketRepository : ITicketRepository
     {
         await _talabeyahTicktingContext.SaveChangesAsync();
     }
+
+    public async Task<int> GetTotalCount()
+    {
+        return await _talabeyahTicktingContext.Tickets.CountAsync();
+    }
 }
